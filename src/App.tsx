@@ -10,7 +10,7 @@ interface AppProps {
 }
 
 export const App: React.FC<AppProps> = ({ delay = 300, onSelected }) => {
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = useState('');
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -36,7 +36,7 @@ export const App: React.FC<AppProps> = ({ delay = 300, onSelected }) => {
   });
 
   const hasSuggestions = filteredPeople.length > 0;
-  const shouldSuggestion = isFocused || query.length > 0;
+  const shouldSuggestion = isFocused || trimmedQuery.length > 0;
 
   const handleSelectPerson = (person: Person) => {
     setQuery(person.name);
