@@ -25,8 +25,14 @@ export const App: React.FC<AppProps> = ({ delay = 300, onSelected }) => {
     }
   }, [query, selectedPerson, onSelected]);
 
+  const trimmedQuery = debouncedQuery.trim().toLowerCase();
+
   const filteredPeople = peopleFromServer.filter(person => {
-    return person.name.toLowerCase().includes(debouncedQuery.toLowerCase());
+    if (trimmedQuery === '') {
+      return true;
+    }
+
+    return person.name.toLowerCase().includes(trimmedQuery);
   });
 
   const hasSuggestions = filteredPeople.length > 0;
